@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="100">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <logicalFolder name="HeaderFiles"
+                   displayName="Header Files"
+                   projectFiles="true">
+      <itemPath>CrystalSystems.h</itemPath>
+      <itemPath>Eqiv.h</itemPath>
+      <itemPath>Parser.h</itemPath>
+      <itemPath>ResParser.h</itemPath>
+      <itemPath>Restraint.h</itemPath>
+      <itemPath>ShelxState.h</itemPath>
+      <itemPath>SymOp.h</itemPath>
+      <itemPath>XYZ.h</itemPath>
+      <itemPath>defines.h</itemPath>
+      <itemPath>myExceptions.h</itemPath>
+      <itemPath>myOpt.h</itemPath>
+      <itemPath>usage.h</itemPath>
+      <itemPath>xAtom.h</itemPath>
+    </logicalFolder>
+    <logicalFolder name="ResourceFiles"
+                   displayName="Resource Files"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="SourceFiles"
+                   displayName="Source Files"
+                   projectFiles="true">
+      <itemPath>CrystalSystems_a.cpp</itemPath>
+      <itemPath>CrystalSystems_c.cpp</itemPath>
+      <itemPath>CrystalSystems_h.cpp</itemPath>
+      <itemPath>CrystalSystems_m.cpp</itemPath>
+      <itemPath>CrystalSystems_o.cpp</itemPath>
+      <itemPath>CrystalSystems_t.cpp</itemPath>
+      <itemPath>Eqiv.cpp</itemPath>
+      <itemPath>Makefile</itemPath>
+      <itemPath>Parser.cpp</itemPath>
+      <itemPath>ResParser.cpp</itemPath>
+      <itemPath>Restraint.cpp</itemPath>
+      <itemPath>ShelxState.cpp</itemPath>
+      <itemPath>SymOp.cpp</itemPath>
+      <itemPath>XYZ.cpp</itemPath>
+      <itemPath>main.cpp</itemPath>
+      <itemPath>myOpt.cpp</itemPath>
+      <itemPath>usage.cpp</itemPath>
+      <itemPath>xAtom.cpp</itemPath>
+    </logicalFolder>
+    <logicalFolder name="TestFiles"
+                   displayName="Test Files"
+                   projectFiles="false"
+                   kind="TEST_LOGICAL_FOLDER">
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Debug" type="1">
+      <toolsSet>
+        <compilerSet>CLang|CLang</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <linkerTool>
+          <linkerLibItems>
+            <linkerOptionItem>`pkg-config --libs gsl`</linkerOptionItem>
+          </linkerLibItems>
+        </linkerTool>
+      </compileType>
+      <item path="CrystalSystems.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="CrystalSystems_a.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="CrystalSystems_c.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="CrystalSystems_h.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="CrystalSystems_m.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="CrystalSystems_o.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="CrystalSystems_t.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Eqiv.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Eqiv.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Makefile" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Parser.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Parser.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ResParser.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ResParser.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Restraint.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Restraint.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ShelxState.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ShelxState.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="SymOp.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="SymOp.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="XYZ.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="XYZ.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="defines.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="myExceptions.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="myOpt.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="myOpt.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="usage.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="usage.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="xAtom.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="xAtom.h" ex="false" tool="3" flavor2="0">
+      </item>
+    </conf>
+    <conf name="Release" type="1">
+      <toolsSet>
+        <compilerSet>CLang|CLang</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <developmentMode>5</developmentMode>
+        </cTool>
+        <ccTool>
+          <developmentMode>5</developmentMode>
+        </ccTool>
+        <fortranCompilerTool>
+          <developmentMode>5</developmentMode>
+        </fortranCompilerTool>
+        <asmTool>
+          <developmentMode>5</developmentMode>
+        </asmTool>
+      </compileType>
+      <item path="CrystalSystems.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="CrystalSystems_a.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="CrystalSystems_c.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="CrystalSystems_h.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="CrystalSystems_m.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="CrystalSystems_o.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="CrystalSystems_t.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Eqiv.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Eqiv.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Makefile" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Parser.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Parser.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ResParser.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ResParser.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Restraint.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Restraint.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ShelxState.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ShelxState.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="SymOp.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="SymOp.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="XYZ.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="XYZ.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="defines.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="myExceptions.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="myOpt.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="myOpt.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="usage.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="usage.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="xAtom.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="xAtom.h" ex="false" tool="3" flavor2="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>
