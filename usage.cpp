@@ -26,7 +26,8 @@ void usage() {
             << "    -I iter : maximum number of iterations [" << Defs::GSL::maxIter << "]\n"
             << "    -e eps  : expected precision (epsilon gradient) [" << Defs::GSL::eps_grad << "]\n"
             << "    -h / -? : print this usage and exit\n"
-            << "    -v      : verbose, increase verbosity\n"
+            << "    -v num  : verbosity level 'num'. Use 'zero' for iteration\n"
+            << "              with SHELXL refinement.\n"
             << std::endl;
 }
 
