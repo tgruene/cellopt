@@ -19,6 +19,7 @@
 #include <cmath>
 #include <iostream>
 #include <iomanip>
+#include <complex>
 
 myOpt::myOpt(const ResParser& resdata, const char crystsystem, const double steps,
         const double tol, const double eps, const int maxIter, const short& verbosity) :
@@ -109,6 +110,22 @@ verbosity_(verbosity) {
         std::cout << "*** Error: no restraint atom pairs found.\n"
                 << "*** Make sure there are no typos, and resi names are correct.\n";
         throw myExcepts::Usage("No restrained atom pairs");
+    }
+    // create a vector sum of all restraints
+    if (verbosity_ > 1) {
+        XYZ sumr (0,0,0), wsumr(0,0,0);
+        double sumweights (0.0);
+        for (auto it = numrestraints.begin(); it != numrestraints.end(); ++it) {
+            sumr += it->dX_;
+            wsumr += it->weight_ * it->dX_;
+            sumweights += it->weight_;
+        }
+        wsumr *= 1.0/sumweights;
+        wsumr *= 1./std::sqrt(wsumr.norm2());
+        sumr  *= 1.0/numrestraints.size();
+        sumr  *= 1./std::sqrt(sumr.norm2());
+        std::cout << "---> Normalised vector sum of restraints vectors:          " << sumr << '\n'
+                << "     Normalised vector sum of weighted restraints vectors: " << wsumr << '\n';
     }
 
     // make numeric restraints, 

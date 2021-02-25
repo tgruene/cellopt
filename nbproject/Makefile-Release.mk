@@ -68,7 +68,7 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=
+LDLIBSOPTIONS=`pkg-config --libs gsl` -static  
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
@@ -81,87 +81,87 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cellopt: ${OBJECTFILES}
 ${OBJECTDIR}/CrystalSystems_a.o: CrystalSystems_a.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/CrystalSystems_a.o CrystalSystems_a.cpp
+	$(COMPILE.cc) -O2 `pkg-config --cflags gsl`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/CrystalSystems_a.o CrystalSystems_a.cpp
 
 ${OBJECTDIR}/CrystalSystems_c.o: CrystalSystems_c.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/CrystalSystems_c.o CrystalSystems_c.cpp
+	$(COMPILE.cc) -O2 `pkg-config --cflags gsl`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/CrystalSystems_c.o CrystalSystems_c.cpp
 
 ${OBJECTDIR}/CrystalSystems_h.o: CrystalSystems_h.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/CrystalSystems_h.o CrystalSystems_h.cpp
+	$(COMPILE.cc) -O2 `pkg-config --cflags gsl`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/CrystalSystems_h.o CrystalSystems_h.cpp
 
 ${OBJECTDIR}/CrystalSystems_m.o: CrystalSystems_m.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/CrystalSystems_m.o CrystalSystems_m.cpp
+	$(COMPILE.cc) -O2 `pkg-config --cflags gsl`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/CrystalSystems_m.o CrystalSystems_m.cpp
 
 ${OBJECTDIR}/CrystalSystems_o.o: CrystalSystems_o.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/CrystalSystems_o.o CrystalSystems_o.cpp
+	$(COMPILE.cc) -O2 `pkg-config --cflags gsl`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/CrystalSystems_o.o CrystalSystems_o.cpp
 
 ${OBJECTDIR}/CrystalSystems_t.o: CrystalSystems_t.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/CrystalSystems_t.o CrystalSystems_t.cpp
+	$(COMPILE.cc) -O2 `pkg-config --cflags gsl`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/CrystalSystems_t.o CrystalSystems_t.cpp
 
 ${OBJECTDIR}/Eqiv.o: Eqiv.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Eqiv.o Eqiv.cpp
+	$(COMPILE.cc) -O2 `pkg-config --cflags gsl`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Eqiv.o Eqiv.cpp
 
 ${OBJECTDIR}/Parser.o: Parser.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Parser.o Parser.cpp
+	$(COMPILE.cc) -O2 `pkg-config --cflags gsl`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Parser.o Parser.cpp
 
 ${OBJECTDIR}/ResParser.o: ResParser.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ResParser.o ResParser.cpp
+	$(COMPILE.cc) -O2 `pkg-config --cflags gsl`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ResParser.o ResParser.cpp
 
 ${OBJECTDIR}/Restraint.o: Restraint.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Restraint.o Restraint.cpp
+	$(COMPILE.cc) -O2 `pkg-config --cflags gsl`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Restraint.o Restraint.cpp
 
 ${OBJECTDIR}/ShelxState.o: ShelxState.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ShelxState.o ShelxState.cpp
+	$(COMPILE.cc) -O2 `pkg-config --cflags gsl`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ShelxState.o ShelxState.cpp
 
 ${OBJECTDIR}/SymOp.o: SymOp.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/SymOp.o SymOp.cpp
+	$(COMPILE.cc) -O2 `pkg-config --cflags gsl`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/SymOp.o SymOp.cpp
 
 ${OBJECTDIR}/XYZ.o: XYZ.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/XYZ.o XYZ.cpp
+	$(COMPILE.cc) -O2 `pkg-config --cflags gsl`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/XYZ.o XYZ.cpp
 
 ${OBJECTDIR}/main.o: main.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
+	$(COMPILE.cc) -O2 `pkg-config --cflags gsl`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
 
 ${OBJECTDIR}/myOpt.o: myOpt.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/myOpt.o myOpt.cpp
+	$(COMPILE.cc) -O2 `pkg-config --cflags gsl`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/myOpt.o myOpt.cpp
 
 ${OBJECTDIR}/usage.o: usage.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/usage.o usage.cpp
+	$(COMPILE.cc) -O2 `pkg-config --cflags gsl`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/usage.o usage.cpp
 
 ${OBJECTDIR}/xAtom.o: xAtom.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/xAtom.o xAtom.cpp
+	$(COMPILE.cc) -O2 `pkg-config --cflags gsl`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/xAtom.o xAtom.cpp
 
 # Subprojects
 .build-subprojects:

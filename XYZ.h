@@ -21,7 +21,7 @@ private:
     float x_, y_, z_;
 
 public:
-    XYZ(){};
+    XYZ() = default;
     XYZ(const float& x, const float& y, const float& z);
     ~XYZ(){}
     
@@ -29,14 +29,19 @@ public:
     float y() const { return y_; }
     float z() const { return z_; }
     
+    double norm2() const { return x_*x_ + y_*y_ + z_*z_;}
+    
+    XYZ& operator+= (const XYZ& other);
+    XYZ& operator*= (const float& s);
+    
     friend XYZ operator* (const SymOp& R, const XYZ& xyz);
+    friend XYZ operator* (const float& s, const XYZ& xyz);
     friend XYZ operator+ (const XYZ& x1, const XYZ& x2);
     friend XYZ operator- (const XYZ& x1, const XYZ& x2);
+    
+    friend std::ostream& operator<<(std::ostream& out, const XYZ& xyz);
 
 };
 
-XYZ operator* (const SymOp& R, const XYZ& xyz); // defined in XYZ.cpp
-XYZ operator+ (const XYZ& x1, const XYZ& x2); // defined in XYZ.cpp
-XYZ operator- (const XYZ& x1, const XYZ& x2); // defined in XYZ.cpp
 #endif /* XYZ_H */
 

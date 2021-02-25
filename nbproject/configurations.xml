@@ -153,6 +153,12 @@
         <asmTool>
           <developmentMode>5</developmentMode>
         </asmTool>
+        <linkerTool>
+          <linkerLibItems>
+            <linkerOptionItem>`pkg-config --libs gsl`</linkerOptionItem>
+            <linkerOptionItem>-static</linkerOptionItem>
+          </linkerLibItems>
+        </linkerTool>
       </compileType>
       <item path="CrystalSystems.h" ex="false" tool="3" flavor2="0">
       </item>
