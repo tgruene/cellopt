@@ -29,6 +29,9 @@ private:
     int maxIter_;
     char crystalSystem_;
     short verbosity_;
+    
+    // simplex minimiser
+    gsl_multimin_function fnm_;
 public:
     myOpt(const ResParser& resdata, const char crystsystem, const double steps, 
     const double tol, const double eps_, const int maxIter, const short& verbosity);
@@ -36,6 +39,9 @@ public:
     ~myOpt();
     
     double optimise();
+    
+    // simplex version of optimise
+    double optimise_nm();
     
     //! provide information about current cell and target value
     void info() const;

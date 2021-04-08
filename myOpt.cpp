@@ -148,6 +148,10 @@ verbosity_(verbosity) {
     fdf_.params = (void*) gslrestr_;
 }
 
+/**
+ * Optimisation with BFGS2 gradient algorithm
+ * @return target value
+ */
 double myOpt::optimise() {
     int iter(0);
     // define target function
@@ -183,6 +187,44 @@ double myOpt::optimise() {
 
     // update cell with minimum
     return tgt_value;
+}
+
+/**
+ * Optimisation with non-gradient Nelder Mead, V2
+ * @return 
+ */
+double myOpt::optimise_nm() {
+    const gsl_multimin_fminimizer_type *optType = gsl_multimin_fminimizer_nmsimplex2;
+    gsl_multimin_fminimizer* minimiser = gsl_multimin_fminimizer_alloc(optType, fnm_.n);
+    
+    /* set up starting points */
+    
+    /* this is incomplete */
+    /* carry out minimisation steps */
+    int status;
+    int iter(0);
+    do {
+        iter++;
+        status = gsl_multimin_fminimizer_iterate(minimiser);
+
+        if (status) break;
+
+        double size = gsl_multimin_fminimizer_size(minimiser);
+        status = gsl_multimin_test_size(size, eps_);
+
+        if (status == GSL_SUCCESS) {
+            break;
+        }
+
+    }    while (status == GSL_CONTINUE && iter < maxIter_);
+
+    gsl_vector_memcpy(cell_, gsl_multimin_fminimizer_x(minimiser));
+    const double tgt_value = gsl_multimin_fminimizer_minimum(minimiser);
+
+    gsl_multimin_fminimizer_free(minimiser);
+    
+    return tgt_value;
+
 }
 
 myOpt::~myOpt() {
