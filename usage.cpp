@@ -25,6 +25,7 @@ void usage() {
             << "    -t tol  : GSL tolerance [" << Defs::GSL::tol  << "]\n"
             << "    -I iter : maximum number of iterations [" << Defs::GSL::maxIter << "]\n"
             << "    -e eps  : expected precision (epsilon gradient) [" << Defs::GSL::eps_grad << "]\n"
+            << "    -M c    : optimisation algorithm: 'g' = BFGS2 [default], 's' = Nelder-Mead (simplex)\n"
             << "    -h / -? : print this usage and exit\n"
             << "    -v num  : verbosity level 'num'. Use 'zero' for iteration\n"
             << "              with SHELXL refinement.\n"

@@ -21,7 +21,7 @@ namespace Defs {
         //! tolerance of BFGS2 minimisation algorithm. 0.1 recommended
         const double tol  (0.1);
         //! gradient cut-off for stable minimum (expected precision)
-        const double eps_grad(1e-5);
+        const double eps_grad(-1);
         //! maximum number of iterations
         const int maxIter (500);
     }

@@ -32,13 +32,28 @@ private:
     
     // simplex minimiser
     gsl_multimin_function fnm_;
+    gsl_vector* stepsnm_;
+    // simplex: target volume to be reached
+    double nm_vol_;
+    
+    // setup up specific for bfgs2 minimisation
+    void setup_bfgs2();
+    
+    // setup up specific for simplex minimisation
+    void setup_nm();
 public:
+    
+    enum class optimAlgo { bfgs2, nelder_mead } opttype_;
+    
     myOpt(const ResParser& resdata, const char crystsystem, const double steps, 
-    const double tol, const double eps_, const int maxIter, const short& verbosity);
+    const double tol, const double eps_, const int maxIter, const short& verbosity,
+    myOpt::optimAlgo optAlgo);
     
     ~myOpt();
     
     double optimise();
+    
+    double optimise_bfgs2();
     
     // simplex version of optimise
     double optimise_nm();

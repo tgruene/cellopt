@@ -25,6 +25,7 @@ private:
     int   gsl_maxIter_;
     char csystem_;
     std::string insfile_;
+    char optimAlgorithm_;
     
     
     template <typename T> bool getoption(const std::string& option,
@@ -42,6 +43,7 @@ public:
     char  crystalSystem() const { return csystem_; }
     
     std::string insfile() const { return insfile_; }
+    char optimAlgorithm() const { return optimAlgorithm_; }
 
 };
 

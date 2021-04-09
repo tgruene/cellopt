@@ -31,9 +31,12 @@
           <runcommandpicklistitem>"${OUTPUT_PATH}" -v4 -xm -f mbbf4_e_orig.res</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" -v4 -xm -f mbbf4_x1_orig.res</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" -f progesterone_orig.res -xo -v2</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" -f xd_oselnew.res  -Ms -xo</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" -f mbbf4_e_orig.res -xm -v0 -Ms
+</runcommandpicklistitem>
         </runcommandpicklist>
-        <runcommand>"${OUTPUT_PATH}" -f progesterone_orig.res -xo -v2</runcommand>
-        <rundir>/home/tg/univie/projects/ediff/2019/syserrors/10progesterone/work</rundir>
+        <runcommand>"${OUTPUT_PATH}" -f mbbf4_e_orig.res -xm -v0 -Ms</runcommand>
+        <rundir>/home/tg/univie/projects/ediff/2019/syserrors/mbbf4/work</rundir>
         <buildfirst>true</buildfirst>
         <terminal-type>0</terminal-type>
         <remove-instrumentation>0</remove-instrumentation>

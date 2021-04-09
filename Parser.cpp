@@ -31,7 +31,8 @@ gsl_maxIter_(Defs::GSL::maxIter),
 gsl_steps_(Defs::GSL::step),
 gsl_tolerance_(Defs::GSL::tol),
 csystem_('a'),
-insfile_("") {
+insfile_(""),
+optimAlgorithm_('g') {
     for (int i = 1; i < argc; ++i) {
         std::string option = argv[i];
         if (option.substr(0, 2) == "-h" || option.substr(0, 2) == "-?") {
@@ -48,6 +49,7 @@ insfile_("") {
         if (getoption(option, "-e", gsl_epsgrad_, i, argc, argv)) continue;
         if (getoption(option, "-x", csystem_, i, argc, argv)) continue;
         if (getoption(option, "-f", insfile_, i, argc, argv)) continue;
+        if (getoption(option, "-M", optimAlgorithm_, i, argc, argv)) continue;
 
         if (option.at(0) == '-') {
             std::cout << "Unknown option string " << option << std::endl;
