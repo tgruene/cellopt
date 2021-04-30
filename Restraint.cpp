@@ -103,6 +103,12 @@ std::string Restraint::setup(const std::string& at, int& symop, int& resinum) co
         atom.erase(found, std::string::npos);
     }
     found = atom.find('_');
+    const char peek = atom.at(found+1);
+    if (peek == '+' || peek == '-') {
+        // special generalisation of previous or next residue not yet implemente
+        resinum = -1;
+        return atom;
+    }
     if (found != std::string::npos) {
         resinum = std::stoi(atom.substr(found + 1, std::string::npos));
         atom.erase(found, std::string::npos);
