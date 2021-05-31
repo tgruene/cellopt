@@ -25,11 +25,11 @@ class Restraint {
 private:
     float target_, sof_;
     std::string resiclass_;
-    int resinum_;
+    xAtom::ResiNum resinum_;
     std::vector<std::string> atom_pairs_;
     
     // setup search criteria for an atom
-    std::string setup(const std::string& atom, int& symop, int& resinum) const;
+    std::string setup(const std::string& atom, int& symop, const xAtom::ResiNum& resinum) const;
     
 public:
     struct Numeric {
@@ -38,7 +38,7 @@ public:
         double weight_;
     };
     Restraint(){};
-    Restraint(float target, float sof, int resinum, 
+    Restraint(float target, float sof, const xAtom::ResiNum& resinum,
             const std::string& resiclass, const std::vector<std::string>& atom_pairs);
     ~Restraint(){};
     

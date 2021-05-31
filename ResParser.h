@@ -45,7 +45,11 @@ private:
     // read cell from a linw
     void getcell(const std::string& line);
     
-    void resi(const std::string& line);
+    // interpret RESI line
+    void xresi(const std::string& myresi);
+    
+    // interpret resinumber
+    void xresinum (const std::string& rnum);
     
     void part(const std::string& line);
     

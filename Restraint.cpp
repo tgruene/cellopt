@@ -16,9 +16,9 @@
 #include "Restraint.h"
 #include "myExceptions.h"
 
-Restraint::Restraint(float target, float sof, int resinum,
+Restraint::Restraint(float target, float sof, const xAtom::ResiNum& resinum,
         const std::string& resiclass, const std::vector<std::string>& atom_pairs) :
-target_(target), sof_(sof), resinum_(resinum),
+target_(target), sof_(sof), resinum_(resinum), 
 resiclass_(resiclass), atom_pairs_(atom_pairs) {
 }
 
@@ -34,7 +34,7 @@ std::vector<Restraint::Numeric> Restraint::make(const std::vector<xAtom>& atoms,
     // in case resiclass and resinum are empty, name + residuenumber should be unique
     if (resiclass_.empty()) {
         for (it = atom_pairs_.begin(); it != atom_pairs_.end(); it += 2) {
-            int resinum1(resinum_), resinum2(resinum_);
+            xAtom::ResiNum resinum1 (resinum_), resinum2(resinum_);
             int eqiv1(0), eqiv2(0);
             std::string atom1(setup(*it, eqiv1, resinum1));
             std::string atom2(setup(*(it + 1), eqiv2, resinum2));
@@ -57,7 +57,7 @@ std::vector<Restraint::Numeric> Restraint::make(const std::vector<xAtom>& atoms,
          * create respective restraint
          */
         for (it = atom_pairs_.begin(); it != atom_pairs_.end(); it += 2) {
-            int resinum1(resinum_), resinum2(resinum_);
+            xAtom::ResiNum resinum1(resinum_), resinum2(resinum_);
             int eqiv1(0), eqiv2(0);
             // with 'resiclass', first atom may not have a residue number
             std::string atom1(setup(*it, eqiv1, resinum1));
@@ -95,7 +95,7 @@ std::vector<Restraint::Numeric> Restraint::make(const std::vector<xAtom>& atoms,
  * @param resinum return residue number in Na1_num
  * @return 
  */
-std::string Restraint::setup(const std::string& at, int& symop, int& resinum) const {
+std::string Restraint::setup(const std::string& at, int& symop, const xAtom::ResiNum& resinum) const {
     std::string atom(at);
     size_t found(atom.find("_$"));
     if ((found != std::string::npos)) {
@@ -106,11 +106,22 @@ std::string Restraint::setup(const std::string& at, int& symop, int& resinum) co
     const char peek = atom.at(found+1);
     if (peek == '+' || peek == '-') {
         // special generalisation of previous or next residue not yet implemente
-        resinum = -1;
+        resinum = xAtom::ResiNum();
         return atom;
     }
     if (found != std::string::npos) {
-        resinum = std::stoi(atom.substr(found + 1, std::string::npos));
+        // debugging
+        std::cout <<  "---> Debugging: converting \'" << atom << "\' to residue number\n" << std::endl;
+        const std::string chain_num = atom.substr(found + 1, std::string::npos);
+        size_t colon = chain_num.find(':');
+        if (colon != std::string::npos) {
+            chainID = chain_num.front();
+        }
+        else {
+            chainID = 0;
+            colon = 0;
+        }
+        resinum = std::stoi(atom.substr(colon + 1, std::string::npos));
         atom.erase(found, std::string::npos);
     }
 

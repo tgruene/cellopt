@@ -14,6 +14,7 @@
 #include "xAtom.h"
 #include "myExceptions.h"
 #include <iostream>
+#include <stdexcept>
 
 xAtom::xAtom(const std::string& instr, const ShelxState& xstate) {
     float x,y,z;
@@ -41,6 +42,7 @@ xAtom::xAtom(const std::string& instr, const ShelxState& xstate) {
         U_[5] = u[4];
     }
     
+    chainID_ = xstate.chainID();
     resinum_ = xstate.resinumber();
     resiclass_ = xstate.resiclass();
     partnum_  = xstate.partnum();
@@ -54,12 +56,13 @@ xAtom::xAtom(const std::string& instr, const ShelxState& xstate) {
  * @param resinum
  * @return 
  */
-bool xAtom::match(const std::string name, const std::string& resiclass, int resinum, int part) const {
+bool xAtom::match(const std::string name, const std::string& resiclass, const xAtom::ResiNum& resinum, int part = 0) const {
     if (name != name_) return false;
     if (part != 0 && partnum_ != 0 && partnum_ != part) return false;
     // when residue number is set, residue class is irrelevant
-    if (resinum != 0 && resinum_ == resinum) return true;
-    if (resinum == 0 && !resiclass.empty() && resiclass == resiclass)
+    if (resinum.chain != 0 && xresinum_ != resinum.chain) return false;
+    if (resinum != 0 && xresinum_.resinumber == resinum.resinumber) return true;
+    if (resinum.resinumber == 0 && !resiclass.empty() && resiclass == resiclass)
         return true;
     
     return false;
@@ -77,4 +80,22 @@ std::ostream& operator<< (std::ostream& out, const xAtom& atom) {
     if (atom.partnum_ != 0) out << '^' << atom.partnum_;
     if (atom.resiclass_ != "") out << " Residue " << atom.resiclass_;
     return out;
+}
+
+xAtom::ResiNum xAtom::resinum(const std::string resistring) const {
+    std::string::size_t colon = resistring.find(':');
+
+    xAtom::ResiNum result;
+    if (colon == 1) { // colon found get chainID
+        result.chain = resistring.front();
+    } else if (colon != std::string::npos) {
+        throw myExcepts::Format("Invalid residue string, only 'ID:NUMBER of NUMBER allowed");
+    }
+
+    try {
+        result.resinumber = std::stoi(resistring.substr(colon + 1, std::string::npos));
+    } catch (std::invalid_argument& e) {
+        throw myExcepts::Format("Invalid residue string, only 'ID:NUMBER of NUMBER allowed");
+    }
+    return result;
 }

@@ -40,9 +40,9 @@ ResParser::ResParser(const char* resfile, const short& verbosity) : resfile_(res
     readres(resfile_);
     // interpret res-file, i.e. generate restraints
     interpres();
-    
+
     if (verbosity > 0) {
-    std::cout << "---> Number of DFIX or DANG instructions: " << restraints_.size() << "\n";
+        std::cout << "---> Number of DFIX or DANG instructions: " << restraints_.size() << "\n";
     }
     if (restraints_.empty()) {
         std::cout << " *** Error: no restraints found\n";
@@ -91,14 +91,14 @@ void ResParser::readres(const std::string& filename) {
             myline = upcase(myline);
             reslines_.push_back(myline);
         }
-            
+
         continue;
     }
 
     inp.close();
     if (verbosity_ > 0) {
-    std::cout << "---> Input of " << std::setw(5) << reslines_.size() << " lines from file "
-            << filename << '\n';
+        std::cout << "---> Input of " << std::setw(5) << reslines_.size() << " lines from file "
+                << filename << '\n';
     }
 
 }
@@ -122,7 +122,13 @@ void ResParser::part(const std::string& line) {
     shelxState_.partsof(sof);
 }
 
-void ResParser::resi(const std::string& line) {
+/**
+ * RESI lines are difficult, because they are allowed to contain a residue number (digits only)
+ * or a residue class (four characters, first one a letter) in either order. residue number can be preceded by 
+ * a chain ID, separated by a colon ':'
+ * @param line
+ */
+void ResParser::xresi(const std::string& line) {
     std::istringstream conv(line);
     int num(0);
     std::string first, second;
@@ -131,46 +137,67 @@ void ResParser::resi(const std::string& line) {
         std::cout << "*** Error: RESI requires at least number of name of residue class.\n";
         throw myExcepts::ShelxFormat("RESI missing argument");
     }
-    try {
-        num = std::stoi(first);
-        // if this works, it is a resi number
-        shelxState_.resinumber(num);
-    }    catch (std::invalid_argument& e) {
-        // conversion did not work, this must be residue name
-        shelxState_.resiclass(first);
-    }
-    
 
-    // try for second argument
-    conv >> second;
-    if (conv.fail()) return; // no second argument
-    
     try {
-        num = std::stoi(second);
-        // if this works, it is residue number. Double check that previous was
-        // word, not number
-        if (shelxState_.resiclass().empty()) {
-            std::cout << "### Syntax error, 2 residue numbers on RESI:\n"
-                    << "   RESI " << line << '\n';
-            throw myExcepts::Format("SHELX RESI command");
-        }
+        xresinum(first);
+        // try for second argument
+        conv >> second;
+        if (conv.fail()) return; // no second argument
         else {
-            shelxState_.resinumber(num);
+            shelxState_.resiclass(second);
+            return;
         }
-    }    catch (std::invalid_argument& e) { // not a number, interpret is word
-        shelxState_.resiclass(second);
-    }
+    }    catch (std::invalid_argument& e) {
+        // this string is not a number - set as residue class
+        shelxState_.resiclass(first);
+        // try for second argument
+        conv >> second;
+        if (conv.fail()) return; // no second argument
 
-    if (conv.fail()) {
-        std::cout << "*** Error: cannot interpret RESI line " << line << "\n";
-        throw myExcepts::ShelxFormat("RESI format");
+        // second argument must be a residue number
+        try {
+            xresinum(second);
+        }        catch (...) {
+            // this is indeed an error, has to be 
+            std::cout << "*** Error: illegal residue number in " << first << '\n';
+            throw myExcepts::Format("Illegal residue number in " + first);
+        }
+    }    catch (myExcepts::Format& e) {
+        std::cout << "*** Error: illegal residue number in " << first << '\n';
+        throw;
     }
 
     conv >> num;
     if (conv.fail() || conv.eof()) return;
 
+    // alias: unused
     shelxState_.resialias(num);
 
+}
+/**
+ * Expects a string that represents a number, or a combination of 'ID:number', 
+ * where ID is a single alpha-numerical character
+ * @param line
+ */
+void ResParser::xresinum(const std::string& myresi) {
+    int resistart(0);
+    try {
+        char chainid(0);
+
+        if (myresi.length() >= 2 && myresi.at(1) == ':') { // chain ID+resinumber
+            chainid = myresi.front();
+            resistart = 2;
+        }
+        // only set states if conversion worked
+        const int num = std::stoi(myresi.substr(resistart, 4));
+        shelxState_.chainID(chainid);
+        shelxState_.resinumber(num);
+    } catch (std::invalid_argument &e) {
+        // 'num' is not a number
+        if (resistart == 2) throw (myExcepts::Format("Error in SHELX RESI car: not a number after colon in " + myresi));
+            // fine - string that is not a number
+        else throw;
+    }
 }
 
 /**
@@ -188,15 +215,15 @@ void ResParser::getcell(const std::string& line) {
         throw myExcepts::Format(line.c_str());
     }
     if (verbosity_ > 0) {
-    std::cout << "---> Cell constants: "
-            << std::fixed
-            << std::setw(9) << std::setprecision(5) << a_
-            << std::setw(9) << std::setprecision(5) << b_
-            << std::setw(9) << std::setprecision(5) << c_
-            << std::setw(9) << std::setprecision(4) << alpha_
-            << std::setw(9) << std::setprecision(4) << beta_
-            << std::setw(9) << std::setprecision(4) << gamma_
-            << std::endl;
+        std::cout << "---> Cell constants: "
+                << std::fixed
+                << std::setw(9) << std::setprecision(5) << a_
+                << std::setw(9) << std::setprecision(5) << b_
+                << std::setw(9) << std::setprecision(5) << c_
+                << std::setw(9) << std::setprecision(4) << alpha_
+                << std::setw(9) << std::setprecision(4) << beta_
+                << std::setw(9) << std::setprecision(4) << gamma_
+                << std::endl;
     }
 }
 
@@ -209,14 +236,14 @@ void ResParser::interpres() {
         if (std::isspace(it->front())) continue;
         try {
             if (xcmd(*it)) continue;
-        }        catch (myExcepts::ShelxEoF& e) {
+        } catch (myExcepts::ShelxEoF& e) {
             break;
         }
         // not a shelxl command: read as atoms
         xatoms_.push_back(xAtom(*it, shelxState_));
     }
     if (verbosity_) {
-    std::cout << "---> Read in " << xatoms_.size() << " atoms from ins-file\n";
+        std::cout << "---> Read in " << xatoms_.size() << " atoms from ins-file\n";
     }
 }
 
@@ -228,7 +255,7 @@ void ResParser::interpres() {
 void ResParser::addrestraint(const std::string& line) {
     std::istringstream conv(line.substr(4, std::string::npos));
     std::string resi(""), word;
-    int resinum(0);
+    xAtom::ResiNum resinum;
     float target, sof;
     std::vector<std::string> atom_pairs;
 
@@ -238,11 +265,11 @@ void ResParser::addrestraint(const std::string& line) {
     if (c == '_') conv >> c >> resi;
 
     try {
-        resinum = std::stoi(resi);
+        resinum = xAtom::resinum(resi);
         resi = "";
-    }    catch (std::invalid_argument& e) {
-        // nothing to do
-        resinum = 0;
+    } catch (std::invalid_argument& e) {
+        // nothing to do, make default residue
+        resinum = xAtom::ResiNum();
     }
 
     conv >> target >> word;
@@ -250,7 +277,7 @@ void ResParser::addrestraint(const std::string& line) {
         sof = std::stof(word);
         // if stof does not throuw an error, we can continue
         conv >> word;
-    }    catch (std::invalid_argument& e) { // sof not provided, word is firt atom
+    } catch (std::invalid_argument& e) { // sof not provided, word is firt atom
         sof = default_sof;
     }
     while (!conv.fail()) {
@@ -277,14 +304,14 @@ bool ResParser::xcmd(const std::string& instr) {
     if (instr.substr(0, 3) == "END" || instr.substr(0, 4) == "HKLF") {
         throw myExcepts::ShelxEoF("END or HKLF encountered");
     }
-    
+
     if (instr.substr(0, 3) == "REM") {
         return true;
     }
-    
+
     // empty lines were checked earler. If shorter, cannot be a command
     if (instr.size() < 4) return false;
-    
+
 
     const char* cmdlist[] = {"ABIN", "ACTA", "AFIX", "ANIS", "ANSC", "ANSR",
         "BASF", "BIND", "BLOC", "BOND", "BUMP", "CELL",
@@ -317,7 +344,7 @@ bool ResParser::xcmd(const std::string& instr) {
     }
 
     if (instr.substr(0, 4) == "RESI") {
-        resi(instr.substr(4, std::string::npos));
+        xresi(instr.substr(4, std::string::npos));
         return true;
     }
 
@@ -343,20 +370,20 @@ bool ResParser::xcmd(const std::string& instr) {
 std::vector<Restraint::Numeric> ResParser::restraints() const {
     std::vector<Restraint>::const_iterator it;
     std::vector<Restraint::Numeric> numrestr(0);
-    
+
     for (it = restraints_.begin(); it != restraints_.end(); ++it) {
         std::vector<Restraint::Numeric> localrestr = it->make(xatoms_, eqivs_);
         numrestr.insert(numrestr.end(), localrestr.begin(), localrestr.end());
     }
     if (verbosity_ > 0) {
-    std::cout << "---> Number of restraints from res-file: " << numrestr.size() << '\n';
+        std::cout << "---> Number of restraints from res-file: " << numrestr.size() << '\n';
     }
     return numrestr;
-    
+
 }
 
 std::string ResParser::upcase(const std::string& word) {
-    std::string up (word);
+    std::string up(word);
     for (std::string::iterator it = up.begin(); it != up.end(); ++it) {
         *it = std::toupper(*it);
     }

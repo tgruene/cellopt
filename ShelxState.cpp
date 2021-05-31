@@ -17,6 +17,7 @@
 ShelxState::ShelxState():
 partnum_(0), 
         partsof_(std::nan("")), 
+        chainID_(0), 
         resinumber_(0), 
         resiclass_(""), 
         resialias_(0) {

@@ -21,6 +21,7 @@ private:
     int partnum_;
     float partsof_;
     std::string resiclass_;
+    char chainID_;
     int resinumber_;
     int resialias_;
     
@@ -35,6 +36,7 @@ public:
     std::string& resiclass (const std::string& r) { resiclass_ = r; return resiclass_; }
     int& resinumber (int r) { resinumber_ = r; return resinumber_; }
     int& resialias (int r) { resialias_ = r; return resialias_; }
+    char& chainID (char c) {chainID_ = c; return chainID_; }
     
     //! getters
     int partnum() const { return partnum_; }
@@ -42,6 +44,7 @@ public:
     std::string resiclass() const { return resiclass_;}
     int resinumber() const { return resinumber_; }
     int resialias() const { return resialias_; }
+    char chainID() const { return chainID_; }
     
 
 };
