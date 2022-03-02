@@ -95,7 +95,7 @@ std::vector<Restraint::Numeric> Restraint::make(const std::vector<xAtom>& atoms,
  * @param resinum return residue number in Na1_num
  * @return 
  */
-std::string Restraint::setup(const std::string& at, int& symop, const xAtom::ResiNum& resinum) const {
+std::string Restraint::setup(const std::string& at, int& symop, xAtom::ResiNum& resinum) const {
     std::string atom(at);
     size_t found(atom.find("_$"));
     if ((found != std::string::npos)) {
