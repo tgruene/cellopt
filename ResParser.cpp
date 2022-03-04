@@ -349,7 +349,7 @@ std::vector<Restraint::Numeric> ResParser::restraints() const {
         numrestr.insert(numrestr.end(), localrestr.begin(), localrestr.end());
     }
     if (verbosity_ > 0) {
-    std::cout << "---> Number of restraints from res-file: " << numrestr.size() << '\n';
+    std::cout << "---> Total number of restraints to be applied: " << numrestr.size() << '\n';
     }
     return numrestr;
     
